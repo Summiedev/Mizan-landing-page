@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Instrument+Serif:ital@0;1&family=Inter:opsz,wght@14..32,300..600&family=JetBrains+Mono:wght@300;400;500&family=Newsreader:ital,wght@0,400;1,400&family=Outfit:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: var(--font-serif-active, "Cormorant Garamond", serif);
+  --font-sans: var(--font-sans-active, "Inter", sans-serif);
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Bold Typography / Premium Organic Palette */
+  --color-ivory: #F5F2ED;
+  --color-parchment: #FBF9F7;
+  --color-linen: #f0eae0;
+  --color-walnut: #3C2A21;
+  --color-coffee: #523A2E;
+  --color-clay: #c86b45;
+  --color-terracotta: #a84e2a;
+  --color-bronze: #A68A64;
+  --color-gold: #7D6448;
+  --color-olive: #5b6343;
+  --color-sand: #D4C3B0;
+
+  --animate-fade-in-up: fade-in-up 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-pulse-slow: pulse-slow 8s infinite ease-in-out;
+  --animate-sun-drift: sun-drift 20s infinite ease-in-out;
+}
+
+/* Class style pairings that can be toggled on the root container */
+.font-pair-classical {
+  --font-serif-active: "Instrument Serif", serif;
+  --font-sans-active: "Inter", sans-serif;
+}
+
+.font-pair-warmth {
+  --font-serif-active: "Cormorant Garamond", serif;
+  --font-sans-active: "Inter", sans-serif;
+}
+
+.font-pair-desert {
+  --font-serif-active: "Newsreader", serif;
+  --font-sans-active: "JetBrains Mono", monospace;
+}
+
+.font-pair-modern {
+  --font-serif-active: "Playfair Display", serif;
+  --font-sans-active: "Outfit", sans-serif;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 0.15;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes sun-drift {
+  0%, 100% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: translate(2%, 4%) scale(1.05) rotate(2deg);
+    opacity: 0.3;
+  }
+}
+
+/* Custom Editorial Styling */
+@keyframes bg-warmth-shift {
+  0%, 100% { background-color: #F5F2ED; }
+  50% { background-color: #F8F5F0; }
+}
+
+@keyframes grain-shift {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-0.5%, -0.5%); }
+  20% { transform: translate(0.5%, 0.5%); }
+  30% { transform: translate(-1%, 0.5%); }
+  40% { transform: translate(0.5%, -1%); }
+  50% { transform: translate(-0.5%, 0.5%); }
+  60% { transform: translate(1%, 1%); }
+  70% { transform: translate(-0.5%, -0.5%); }
+  80% { transform: translate(0.5%, -0.5%); }
+  90% { transform: translate(-0.5%, 1%); }
+}
+
+body {
+  background-color: #F5F2ED;
+  color: #3C2A21;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  animation: bg-warmth-shift 24s ease-in-out infinite;
+}
+
+/* Selection Color Theme */
+::selection {
+  background-color: #A68A64;
+  color: #ffffff;
+}
+
+/* Simulated handmade paper texture using pure SVG noise filter with organic shifting steps */
+.paper-texture-overlay {
+  position: fixed;
+  inset: -2%;
+  width: 104%;
+  height: 104%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.045;
+  pointer-events: none;
+  z-index: 9999;
+  animation: grain-shift 8s steps(8) infinite;
+}
+
+.manuscript-border {
+  border: 1px solid rgba(60, 42, 33, 0.12);
+}
+
+.brass-accent {
+  background: linear-gradient(135deg, #A68A64 0%, #7D6448 100%);
+}
+
+/* Tactile micro-shadows that feel physical instead of digital */
+.shadow-tactile {
+  box-shadow: 0 4px 20px -2px rgba(60, 42, 33, 0.06), 0 2px 6px -1px rgba(60, 42, 33, 0.04);
+}
+
+.shadow-tactile-deep {
+  box-shadow: 20px 40px 80px -20px rgba(60, 42, 33, 0.25);
+}
+
+.shadow-inset-soft {
+  box-shadow: inset 0 2px 8px 0 rgba(60, 42, 33, 0.04);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F5F2ED;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4C3B0;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A68A64;
+}
+

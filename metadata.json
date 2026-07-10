@@ -1,0 +1,6 @@
+{
+  "name": "Mizan",
+  "description": "A digital companion for Muslims cultivating the habit of daily generosity, worship, and reflection.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
