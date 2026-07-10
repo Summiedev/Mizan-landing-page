@@ -333,7 +333,7 @@ export default function InteractiveJar() {
       </AnimatePresence>
 
       {/* Editorial Writing Side */}
-      <div className="lg:col-span-7 flex flex-col justify-center space-y-8 order-2 lg:order-1">
+      <div className="lg:col-span-7 flex flex-col justify-center space-y-8 order-1 lg:order-1">
         <div className="space-y-4">
           <span className="font-mono text-xs tracking-[0.2em] text-bronze uppercase block">
             Interactive Experience
@@ -508,7 +508,7 @@ export default function InteractiveJar() {
       </div>
 
       {/* Visual Jar Side */}
-      <div className="lg:col-span-5 flex flex-col items-center justify-center order-1 lg:order-2 space-y-6 relative z-20">
+      <div className="lg:col-span-5 flex flex-col items-center justify-center order-2 lg:order-2 space-y-6 relative z-20">
         <div className="relative w-full max-w-[280px] sm:max-w-[320px] aspect-[4/5] flex items-center justify-center">
           {/* Subtle Ambient Sunlight Glow behind the jar */}
           <div className="absolute top-[10%] left-[10%] w-[80%] h-[80%] rounded-full bg-gold/15 blur-3xl mix-blend-multiply pointer-events-none" />
@@ -748,3 +748,4 @@ export default function InteractiveJar() {
     </div>
   );
 }
+

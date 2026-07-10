@@ -35,9 +35,20 @@ export default function AppScreenshots() {
   const [activeTab, setActiveTab] = useState<'streak' | 'family' | 'remembrance'>('streak');
   const [beadCount, setBeadCount] = useState(0);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 767px)');
+    const update = () => setIsMobile(media.matches);
+
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
 
   // Handle gentle 3D tilt tracking for the phone visual anchor
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (isMobile) return;
     const rect = e.currentTarget.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
@@ -141,7 +152,7 @@ export default function AppScreenshots() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-wrap gap-2.5 z-10"
+            className="flex flex-nowrap md:flex-wrap gap-2.5 z-10 overflow-x-auto pb-1 pr-1 -mx-1 px-1 no-scrollbar"
           >
             {[
               { id: 'streak', label: 'Streaks of Sincerity', icon: Leaf },
@@ -160,7 +171,7 @@ export default function AppScreenshots() {
                   }}
                   whileHover={{ scale: 1.03, y: -1 }}
                   whileTap={{ scale: 0.97 }}
-                  className={`relative flex items-center space-x-2.5 px-4.5 py-2.5 text-xs font-sans rounded-full transition-all duration-300 border cursor-pointer select-none overflow-hidden ${
+                  className={`relative flex items-center space-x-2.5 px-4 py-2.5 text-[11px] sm:text-xs font-sans rounded-full transition-all duration-300 border cursor-pointer select-none overflow-hidden shrink-0 whitespace-nowrap ${
                     isSelected
                       ? 'text-ivory border-walnut shadow-sm'
                       : 'bg-white/50 text-coffee border-sand hover:bg-white hover:border-bronze'
@@ -205,19 +216,19 @@ export default function AppScreenshots() {
           className="lg:col-span-6 flex justify-center order-2 lg:order-1 relative"
         >
           {/* Outer perspective wrapper */}
-          <div className="relative p-4" style={{ perspective: 1200 }}>
+          <div className="relative p-4" style={{ perspective: isMobile ? 700 : 1200 }}>
             {/* Interactive Phone body */}
             <motion.div
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               animate={{
-                rotateX: mousePos.y * -8,
-                rotateY: mousePos.x * 8,
-                scale: mousePos.x !== 0 ? 1.01 : 1,
+                rotateX: isMobile ? 0 : mousePos.y * -8,
+                rotateY: isMobile ? 0 : mousePos.x * 8,
+                scale: mousePos.x !== 0 && !isMobile ? 1.01 : 1,
               }}
               transition={{ type: "spring", stiffness: 110, damping: 20 }}
               style={{ transformStyle: "preserve-3d" }}
-              className="w-full max-w-[340px] aspect-[9/18.5] bg-parchment rounded-[42px] p-3.5 border-[6px] border-coffee/90 shadow-[0_24px_60px_-15px_rgba(60,42,33,0.07)] relative overflow-hidden flex flex-col"
+              className="w-full max-w-[320px] sm:max-w-[340px] aspect-[9/18.5] bg-parchment rounded-[42px] p-3.5 border-[6px] border-coffee/90 shadow-[0_24px_60px_-15px_rgba(60,42,33,0.07)] relative overflow-hidden flex flex-col"
             >
               {/* Subtle glossy glare layer tracking mouse */}
               <motion.div 
@@ -583,3 +594,5 @@ export default function AppScreenshots() {
     </div>
   );
 }
+
+

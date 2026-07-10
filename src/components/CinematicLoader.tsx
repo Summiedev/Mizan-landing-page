@@ -72,7 +72,7 @@ export default function CinematicLoader({ onComplete, onExitStart }: CinematicLo
       setRevealText(true);
     }, 1150);
 
-    // 5. Swift hold, then begin high-end buttery scale-fade exit transition
+    // 5. Gentle hold, then begin a smooth scale-fade exit transition
     const timerExit = setTimeout(() => {
       setIsExiting(true);
       if (onExitStart) onExitStart();
@@ -110,10 +110,10 @@ export default function CinematicLoader({ onComplete, onExitStart }: CinematicLo
         initial={{ opacity: 1, scale: 1 }}
         animate={{ 
           opacity: isExiting ? 0 : 1,
-          scale: isExiting ? 1.05 : 1,
+          scale: isExiting ? 1.02 : 1,
         }}
         transition={{ 
-          duration: 0.75, 
+          duration: 0.95, 
           ease: [0.16, 1, 0.3, 1] 
         }}
         className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-[#110e0c] select-none overflow-hidden"
@@ -295,7 +295,7 @@ export default function CinematicLoader({ onComplete, onExitStart }: CinematicLo
                   }}
                   className="font-serif text-3xl sm:text-4xl text-parchment font-medium tracking-wide"
                 >
-                  mizan<span className="text-gold">.</span>
+                 Mizan<span className="text-gold">.</span>
                 </motion.h1>
 
                 {/* Subtitle reveal */}
@@ -320,3 +320,4 @@ export default function CinematicLoader({ onComplete, onExitStart }: CinematicLo
     </AnimatePresence>
   );
 }
+

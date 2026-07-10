@@ -12,7 +12,9 @@ import {
   ShieldAlert,
   Compass,
   Palette,
-  Check
+  Check,
+  Menu,
+  X
 } from 'lucide-react';
 import InteractiveJar from './components/InteractiveJar';
 import AppScreenshots from './components/AppScreenshots';
@@ -40,6 +42,8 @@ export default function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [activeRef, setActiveRef] = useState<number | null>(null);
   const [fontPairing, setFontPairing] = useState<'classical' | 'warmth' | 'desert' | 'modern'>('warmth');
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
@@ -59,7 +63,28 @@ export default function App() {
   }, [mousePos.x, mousePos.y, smoothMouseX, smoothMouseY]);
 
   useEffect(() => {
+    const media = window.matchMedia('(max-width: 767px)');
+    const update = () => setIsMobile(media.matches);
+
+    update();
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobileNavOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [isMobileNavOpen]);
+
+  useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
+      if (window.matchMedia('(max-width: 767px)').matches) return;
       const { clientX, clientY } = e;
       const { innerWidth, innerHeight } = window;
       setMousePos({
@@ -78,18 +103,19 @@ export default function App() {
   const cardScrollY = useTransform(scrollY, [0, 600], [0, -120]);
   const headingScrollY = useTransform(scrollY, [0, 600], [0, 50]);
   const headlineOpacity = useTransform(scrollY, [0, 400], [1, 0.2]);
+  const motionScale = isMobile ? 0.42 : 1;
 
   // Parallax transform variables (declared at top level to respect Rules of Hooks)
-  const ambientLightX = useTransform(smoothMouseX, [-0.5, 0.5], [-35, 35]);
-  const ambientLightY = useTransform(smoothMouseY, [-0.5, 0.5], [-35, 35]);
+  const ambientLightX = useTransform(smoothMouseX, [-0.5, 0.5], [-35 * motionScale, 35 * motionScale]);
+  const ambientLightY = useTransform(smoothMouseY, [-0.5, 0.5], [-35 * motionScale, 35 * motionScale]);
 
-  const previewRotateX = useTransform(smoothMouseY, [-0.5, 0.5], [6, -6]);
-  const previewRotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-6, 6]);
-  const previewX = useTransform(smoothMouseX, [-0.5, 0.5], [-8, 8]);
-  const previewTranslateY = useTransform(smoothMouseY, [-0.5, 0.5], [-8, 8]);
+  const previewRotateX = useTransform(smoothMouseY, [-0.5, 0.5], [6 * motionScale, -6 * motionScale]);
+  const previewRotateY = useTransform(smoothMouseX, [-0.5, 0.5], [-6 * motionScale, 6 * motionScale]);
+  const previewX = useTransform(smoothMouseX, [-0.5, 0.5], [-8 * motionScale, 8 * motionScale]);
+  const previewTranslateY = useTransform(smoothMouseY, [-0.5, 0.5], [-8 * motionScale, 8 * motionScale]);
 
-  const shadowX = useTransform(smoothMouseX, [-0.5, 0.5], [12, -12]);
-  const shadowY = useTransform(smoothMouseY, [-0.5, 0.5], [12, -12]);
+  const shadowX = useTransform(smoothMouseX, [-0.5, 0.5], [12 * motionScale, -12 * motionScale]);
+  const shadowY = useTransform(smoothMouseY, [-0.5, 0.5], [12 * motionScale, -12 * motionScale]);
 
   const cardX = useTransform(smoothMouseX, [-0.5, 0.5], [-24, 24]);
   const cardTranslateY = useTransform(smoothMouseY, [-0.5, 0.5], [-24, 24]);
@@ -122,33 +148,59 @@ export default function App() {
   const handleSubscribe = (e: FormEvent) => {
     e.preventDefault();
     if (!email.trim() || !email.includes('@')) return;
-    
+
+    const waitlistEndpoint = (import.meta as any).env?.VITE_WAITLIST_ENDPOINT?.trim?.();
+    const payload = {
+      email: email.trim(),
+      timestamp: new Date().toISOString(),
+      source: 'mizan-waitlist',
+    };
+
     // Save locally to represent persistent state
     const waitlist = JSON.parse(localStorage.getItem('mizan_waitlist') || '[]');
-    waitlist.push({ email, timestamp: new Date().toISOString() });
+    waitlist.push(payload);
     localStorage.setItem('mizan_waitlist', JSON.stringify(waitlist));
-    
-    setSubmitted(true);
-    setEmail('');
-    
-    // Meditative trigger chime upon subscription
-    try {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
-      if (AudioContextClass) {
-        const ctx = new AudioContextClass();
-        const osc = ctx.createOscillator();
-        const gain = ctx.createGain();
-        osc.type = 'triangle';
-        osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5 chord chime
-        gain.gain.setValueAtTime(0, ctx.currentTime);
-        gain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.1);
-        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.2);
-        osc.connect(gain);
-        gain.connect(ctx.destination);
-        osc.start();
-        osc.stop(ctx.currentTime + 1.2);
-      }
-    } catch (err) {}
+
+    const finalizeSubscription = () => {
+      setSubmitted(true);
+      setEmail('');
+
+      // Meditative trigger chime upon subscription
+      try {
+        const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+        if (AudioContextClass) {
+          const ctx = new AudioContextClass();
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5 chord chime
+          gain.gain.setValueAtTime(0, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0.06, ctx.currentTime + 0.1);
+          gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 1.2);
+          osc.connect(gain);
+          gain.connect(ctx.destination);
+          osc.start();
+          osc.stop(ctx.currentTime + 1.2);
+        }
+      } catch (err) {}
+    };
+
+    if (!waitlistEndpoint) {
+      finalizeSubscription();
+      return;
+    }
+
+    fetch(waitlistEndpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    })
+      .catch(() => {
+        // Preserve the local waitlist entry even if the remote endpoint is unavailable.
+      })
+      .finally(finalizeSubscription);
   };
 
   const fontClass = {
@@ -277,10 +329,25 @@ export default function App() {
                 transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.4 }}
                 className="block"
               >
-                mizan<span className="text-terracotta font-serif">.</span>
+                Mizan<span className="text-terracotta font-serif">.</span>
               </motion.span>
             </span>
           </div>
+
+          <motion.button
+            type="button"
+            className="md:hidden inline-flex items-center gap-2 rounded-full border border-sand bg-white/75 px-4 py-2 text-walnut shadow-sm"
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            whileTap={{ scale: 0.96 }}
+            onClick={() => setIsMobileNavOpen((open) => !open)}
+            aria-label={isMobileNavOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={isMobileNavOpen}
+            aria-controls="mobile-nav-panel"
+          >
+            {isMobileNavOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            <span className="font-sans text-[11px] font-semibold uppercase tracking-[0.18em]">Menu</span>
+          </motion.button>
 
           <motion.nav 
             initial="hidden"
@@ -329,11 +396,74 @@ export default function App() {
             whileTap={{ scale: 0.96, y: 0 }}
             transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.9 }}
             href="#footer-waitlist"
-            className="px-6 py-2.5 bg-walnut text-ivory text-xs font-sans font-medium tracking-widest uppercase hover:bg-terracotta hover:border-terracotta transition-all duration-300 shadow-sm"
+            className="hidden md:inline-flex px-6 py-2.5 bg-walnut text-ivory text-xs font-sans font-medium tracking-widest uppercase hover:bg-terracotta hover:border-terracotta transition-all duration-300 shadow-sm"
           >
             Join Waitlist
           </motion.a>
         </div>
+        <AnimatePresence>
+          {isMobileNavOpen && (
+            <motion.div
+              id="mobile-nav-panel"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+              className="md:hidden absolute left-0 right-0 top-full z-40 px-4 pt-3"
+            >
+              <div className="rounded-3xl border border-sand/60 bg-ivory/98 shadow-[0_18px_42px_rgba(60,42,33,0.14)] overflow-hidden backdrop-blur-md">
+                <div className="flex items-center justify-between px-5 py-4 border-b border-sand/50">
+                  <div className="flex items-center gap-3">
+                    <MizanIcon className="w-6 h-6 text-bronze" strokeColor="currentColor" dotColor="#B08D57" strokeWidth={16} />
+                    <div>
+                      <p className="font-serif text-base text-walnut leading-none">Quick access</p>
+                      <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-coffee/60 mt-1">Navigate Mizan</p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setIsMobileNavOpen(false)}
+                    className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-sand bg-white text-walnut"
+                    aria-label="Close menu"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div className="p-4 space-y-3">
+                  {[
+                    { href: '#philosophy', label: 'The Why' },
+                    { href: '#interactive-jar', label: 'The Journey' },
+                    { href: '#product', label: 'The Experience' },
+                    { href: '#rythms', label: 'The Community' },
+                  ].map((link) => (
+                    <a
+                      key={link.href}
+                      href={link.href}
+                      onClick={() => setIsMobileNavOpen(false)}
+                      className="flex items-center justify-between rounded-2xl border border-sand/60 bg-white px-4 py-3.5 text-[11px] font-sans uppercase tracking-[0.18em] text-walnut shadow-sm"
+                    >
+                      <span>{link.label}</span>
+                      <ChevronRight className="w-4 h-4 text-bronze" />
+                    </a>
+                  ))}
+
+                  <a
+                    href="#footer-waitlist"
+                    onClick={() => setIsMobileNavOpen(false)}
+                    className="flex items-center justify-between rounded-2xl bg-walnut px-4 py-3.5 text-ivory shadow-sm"
+                  >
+                    <div>
+                      <p className="font-sans text-[10px] uppercase tracking-[0.18em] opacity-80">Stay close</p>
+                      <p className="font-serif text-base italic leading-none mt-1">Join the waitlist</p>
+                    </div>
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </header>
 
       {/* Main Storyflow container */}
@@ -509,8 +639,8 @@ export default function App() {
             <motion.div
               initial={{ opacity: 0, scale: 1.15, y: 15 }}
               animate={isLoaded ? { opacity: 1, scale: 1, y: 0 } : { opacity: 0, scale: 1.15, y: 15 }}
-              transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-              className="relative w-full flex flex-col items-center justify-end"
+              transition={{ duration: 1.6, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+              className="relative w-full flex flex-col items-center lg:items-end justify-end"
             >
               {/* Smooth 3D Interactive Mockup Container with scroll-parallax and mouse parallax */}
               <motion.div
@@ -523,7 +653,7 @@ export default function App() {
                   translateY: previewTranslateY,
                   transformStyle: "preserve-3d",
                 }}
-                className="relative w-[280px] h-[550px] z-20"
+                className="relative w-[250px] sm:w-[280px] h-[490px] sm:h-[550px] z-20 mx-auto lg:mx-0"
               >
               {/* Nested motion.div to handle the continuous subtle idle float (±5px vertical drift, ±0.5deg rotation, slow 6s loop) */}
               <motion.div
@@ -941,9 +1071,9 @@ export default function App() {
                   <div className="space-y-2">
                     <span className="font-mono text-[10px] tracking-widest text-bronze uppercase">The Angel’s Prayer</span>
                     <p className="font-serif text-lg text-walnut italic leading-relaxed px-4">
-                      'O Allah! Compensate every person who spends in Your Cause'
+                      O Allah! Compensate every person who spends in Your Cause
                     </p>
-                    <p className="font-mono text-[9px] text-walnut/90">Reference: Sahih al-Bukhari 1442</p>
+                    <p className="font-mono text-[9px] text-walnut/90">Sahih al-Bukhari 1442</p>
                   </div>
                 </div>
 
@@ -1083,7 +1213,7 @@ export default function App() {
               )}
             </AnimatePresence>
 
-            <p className="font-mono text-[10px] text-coffee/75 relative z-10">
+            <p className="font-mono text-[10px] text-coffee/75 relative z-10 text-center md:text-left">
               Mizan values your absolute privacy. Your data is encrypted and never sold.
             </p>
           </motion.div>
@@ -1102,11 +1232,11 @@ export default function App() {
         {/* Subtle top border glow to visually separate it from the page without a harsh line */}
         <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-terracotta/20 to-transparent" />
         
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8 pb-8 border-b border-sand/10">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 pb-8 border-b border-sand/10 justify-items-center md:justify-items-stretch">
           
           {/* Column 1 (Brand) */}
-          <motion.div variants={footerColumn} className="md:col-span-3 space-y-4 text-left">
-            <div className="flex items-center space-x-2">
+          <motion.div variants={footerColumn} className="md:col-span-3 space-y-4 text-center md:text-left w-full max-w-[320px] md:max-w-none">
+            <div className="flex items-center justify-center md:justify-start space-x-2">
               <MizanIcon 
                 className="w-6 h-6 text-bronze/80" 
                 strokeColor="currentColor"
@@ -1114,23 +1244,23 @@ export default function App() {
                 strokeWidth={18}
               />
               <span className="font-serif text-lg font-semibold text-walnut">
-                mizan<span className="text-terracotta font-serif">.</span>
+                Mizan<span className="text-terracotta font-serif"></span>
               </span>
             </div>
-            <p className="font-serif text-xs italic text-walnut/70 leading-relaxed">
+            <p className="font-serif text-md italic text-walnut/70 leading-relaxed">
               “Small drops, eternal oceans.”
             </p>
           </motion.div>
 
-          {/* Column 2 (Explore) */}
-          <motion.div variants={footerColumn} className="md:col-span-3 text-left space-y-4">
+          {/* Column 2 (The Journey) */}
+          <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-4 w-full max-w-[320px] md:max-w-none">
             <h4 className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold text-bronze">Explore</h4>
             <ul className="space-y-2.5 font-sans text-xs">
               {[
-                { href: '#philosophy', label: 'Philosophy' },
-                { href: '#interactive-jar', label: 'The Jar' },
-                { href: '#product', label: 'The Companion' },
-                { href: '#rythms', label: 'Sacred Rhythms' }
+                { href: '#philosophy', label: 'The Why' },
+                { href: '#interactive-jar', label: 'The Journey' },
+                { href: '#product', label: 'The Experience' },
+                { href: '#rythms', label: 'The Community' }
               ].map((link, idx) => (
                 <li key={idx}>
                   <a href={link.href} className="relative py-0.5 group text-coffee/85 hover:text-walnut transition-colors inline-block">
@@ -1143,7 +1273,7 @@ export default function App() {
           </motion.div>
 
           {/* Column 3 (Trust) */}
-          <motion.div variants={footerColumn} className="md:col-span-3 text-left space-y-4">
+          <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-4 w-full max-w-[320px] md:max-w-none">
             <h4 className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold text-bronze">Trust</h4>
             <ul className="space-y-2.5 font-sans text-xs">
               {[
@@ -1162,15 +1292,15 @@ export default function App() {
           </motion.div>
 
           {/* Column 4 (Stay Close) */}
-          <motion.div variants={footerColumn} className="md:col-span-3 text-left space-y-4">
+          <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-4 w-full max-w-[320px] md:max-w-none">
             <h4 className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold text-bronze">Stay close</h4>
             <div className="space-y-3">
-              <p className="font-serif text-sm text-walnut/95 italic">12K+ companions on the path</p>
+              <p className="font-serif text-md text-walnut/95 italic">12K+ companions on the path</p>
               
               {/* Reused avatar stack from hero */}
               <motion.div 
                 whileHover="hover"
-                className="flex items-center gap-3 cursor-pointer select-none"
+                className="flex items-center justify-center md:justify-start gap-3 cursor-pointer select-none"
               >
                 <div className="flex -space-x-3">
                   <motion.div 
@@ -1204,7 +1334,7 @@ export default function App() {
         {/* Bottom copyright segment */}
         <div className="max-w-6xl mx-auto px-6 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
           <p className="font-mono text-[10px] text-coffee/75">
-            &copy; 2026 Mizan. All deeds are between you and the Almighty.
+            &copy; 2026 Mizan. 
           </p>
         </div>
 
@@ -1215,3 +1345,10 @@ export default function App() {
     </div>
   );
 }
+
+
+
+
+
+
+
