@@ -213,7 +213,7 @@ export default function AppScreenshots() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ type: "spring", stiffness: 50, damping: 15 }}
-          className="lg:col-span-6 flex justify-center order-2 lg:order-1 relative"
+          className="lg:col-span-6 flex justify-center order-1 lg:order-1 relative"
         >
           {/* Outer perspective wrapper */}
           <div className="relative p-4" style={{ perspective: isMobile ? 700 : 1200 }}>
@@ -253,9 +253,9 @@ export default function AppScreenshots() {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-1.5">
                       <div className="w-2.5 h-2.5 rounded-full bg-olive animate-pulse" />
-                      <span className="font-mono text-[9px] text-coffee/95 uppercase tracking-widest">Mizan</span>
+                      <span className="font-mono text-[9px] text-coffee uppercase tracking-widest">Mizan</span>
                     </div>
-                    <span className="font-mono text-[9px] text-coffee/95">05:41 AM (Fajr)</span>
+                    <span className="font-mono text-[9px] text-coffee">05:41 AM (Fajr)</span>
                   </div>
                   
                   {/* Status header divider that draws itself */}
@@ -285,7 +285,7 @@ export default function AppScreenshots() {
                           <h4 className="font-serif text-3xl text-walnut italic leading-none font-medium">
                             <AnimatedStreakCount value={18} /> Day Streak
                           </h4>
-                          <p className="font-sans text-[11px] text-coffee/97 max-w-[200px] mx-auto leading-normal">
+                          <p className="font-sans text-[11px] text-coffee max-w-[200px] mx-auto leading-normal">
                             Your intentions are roots in quiet soil. Consistency is beloved to Allah.
                           </p>
                         </div>
@@ -308,7 +308,7 @@ export default function AppScreenshots() {
                           <div className="grid grid-cols-7 gap-1.5 pt-1">
                             {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
                               <div key={i} className="flex flex-col items-center space-y-1">
-                                <span className="font-mono text-[9px] text-coffee/92">{day}</span>
+                                <span className="font-mono text-[9px] text-coffee">{day}</span>
                                 <div className="w-7 h-10 rounded-lg bg-olive/10 border border-olive/20 flex items-center justify-center relative overflow-hidden">
                                   <motion.div
                                     initial={{ height: 0 }}
@@ -325,7 +325,7 @@ export default function AppScreenshots() {
 
                         {/* Habit Log */}
                         <div className="space-y-2">
-                          <span className="font-mono text-[10px] text-coffee/95 uppercase block">Today's Garden Actions</span>
+                          <span className="font-mono text-[10px] text-coffee uppercase block">Today's Garden Actions</span>
                           
                           <div className="bg-white/80 border border-sand rounded-xl p-3 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
                             <div className="flex items-center space-x-2.5">
@@ -334,7 +334,7 @@ export default function AppScreenshots() {
                               </div>
                               <div>
                                 <p className="font-sans text-xs font-semibold text-walnut">Fajr Gratitude Drop</p>
-                                <p className="font-sans text-[10px] text-coffee/92">Recorded at 04:52 AM</p>
+                                <p className="font-sans text-[10px] text-coffee">Recorded at 04:52 AM</p>
                               </div>
                             </div>
                             <span className="font-mono text-[10px] text-olive font-bold">+1 Drop</span>
@@ -347,10 +347,10 @@ export default function AppScreenshots() {
                               </div>
                               <div>
                                 <p className="font-sans text-xs font-semibold text-walnut">Friday Jumu'ah Charity</p>
-                                <p className="font-sans text-[10px] text-coffee/92">Awaiting blessing</p>
+                                <p className="font-sans text-[10px] text-coffee">Awaiting blessing</p>
                               </div>
                             </div>
-                            <span className="font-mono text-[9px] text-coffee/92">Pending</span>
+                            <span className="font-mono text-[9px] text-coffee">Pending</span>
                           </div>
                         </div>
                       </motion.div>
@@ -380,7 +380,7 @@ export default function AppScreenshots() {
                         {/* Live Stream of Generosity */}
                         <div className="space-y-2">
                           <div className="flex justify-between items-center">
-                            <span className="font-mono text-[10px] text-coffee/95 uppercase">Family Deeds Stream</span>
+                            <span className="font-mono text-[10px] text-coffee uppercase">Family Deeds Stream</span>
                             <span className="font-mono text-[9px] text-terracotta font-semibold">Live Feed</span>
                           </div>
 
@@ -402,7 +402,7 @@ export default function AppScreenshots() {
                               <div className="flex-1 min-w-0">
                                 <div className="flex justify-between items-center">
                                   <p className="font-sans text-xs font-bold text-walnut">{item.name}</p>
-                                  <p className="font-mono text-[9px] text-coffee/88">{item.time}</p>
+                                  <p className="font-mono text-[9px] text-coffee">{item.time}</p>
                                 </div>
                                 <p className="font-sans text-[11px] text-coffee mt-0.5 leading-snug">{item.action}</p>
                               </div>
@@ -426,7 +426,7 @@ export default function AppScreenshots() {
                           <div className="space-y-1">
                             <p className="font-mono text-[9px] tracking-wider text-bronze uppercase">Morning Remembrance</p>
                             <h4 className="font-serif text-2xl text-walnut italic">Subhan Allah</h4>
-                            <p className="font-sans text-[10px] text-coffee/80">Glory be to Allah</p>
+                            <p className="font-sans text-[10px] text-coffee">Glory be to Allah</p>
                           </div>
 
                           {/* Dhikr Bead Counter with slide vibration micro-animation */}
@@ -447,7 +447,7 @@ export default function AppScreenshots() {
                               className="flex flex-col items-center"
                             >
                               <span className="font-serif text-3xl font-medium text-walnut">{beadCount % 33}</span>
-                              <span className="font-mono text-[9px] text-coffee/72 uppercase tracking-widest">/ 33 Beads</span>
+                              <span className="font-mono text-[9px] text-coffee uppercase tracking-widest">/ 33 Beads</span>
                             </motion.div>
                             
                             {/* Physical bead representation sliding inside */}
@@ -467,7 +467,7 @@ export default function AppScreenshots() {
                             />
                           </button>
 
-                          <p className="font-sans text-[10px] text-coffee/72 italic leading-normal">
+                          <p className="font-sans text-[10px] text-coffee italic leading-normal">
                             Tap circle to slide the bead. Beautiful haptic click guides your breath.
                           </p>
                         </div>
@@ -493,7 +493,7 @@ export default function AppScreenshots() {
         </motion.div>
 
         {/* Editorial Narrative Side (Content reveals using clipping masks/translations) */}
-        <div className="lg:col-span-6 space-y-12 order-1 lg:order-2 text-left">
+        <div className="lg:col-span-6 space-y-12 order-2 lg:order-2 text-left">
           <div className="space-y-4">
             <div className="overflow-hidden">
               <motion.span 
@@ -524,7 +524,7 @@ export default function AppScreenshots() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-              className="font-sans text-sm sm:text-base text-coffee/95 leading-relaxed font-normal"
+              className="font-sans text-sm sm:text-base text-coffee leading-relaxed font-normal"
             >
              Every screen is designed to help you focus on what matters. No distractions, no pressure, just a calm space that makes every small act of worship feel meaningful.
             </motion.p>
@@ -578,7 +578,7 @@ export default function AppScreenshots() {
                     <h5 className="font-serif text-lg sm:text-xl font-medium text-walnut italic leading-snug">
                       {bullet.title}
                     </h5>
-                    <p className="font-sans text-xs sm:text-[13px] text-coffee/95 leading-relaxed font-normal">
+                    <p className="font-sans text-xs sm:text-[13px] text-coffee leading-relaxed font-normal">
                       {bullet.description}
                     </p>
                   </div>

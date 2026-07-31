@@ -381,7 +381,7 @@ export default function App() {
                   }
                 }}
               >
-                <a href={link.href} className="relative py-1 group text-coffee/95 hover:text-walnut transition-colors">
+                <a href={link.href} className="relative py-1 group text-coffee hover:text-walnut transition-colors">
                   <span>{link.label}</span>
                   <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-walnut transition-all duration-300 group-hover:w-full" />
                 </a>
@@ -417,7 +417,7 @@ export default function App() {
                     <MizanIcon className="w-6 h-6 text-bronze" strokeColor="currentColor" dotColor="#B08D57" strokeWidth={16} />
                     <div>
                       <p className="font-serif text-base text-walnut leading-none">Quick access</p>
-                      <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-coffee/80 mt-1">Navigate Mizan</p>
+                      <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-coffee mt-1">Navigate Mizan</p>
                     </div>
                   </div>
                   <button
@@ -563,7 +563,7 @@ export default function App() {
                   style={{ originY: 0 }}
                   className="absolute left-0 top-0 bottom-0 w-0.5 bg-clay"
                 />
-                <p className="font-serif text-lg sm:text-xl text-walnut/97 italic leading-relaxed">
+                <p className="font-serif text-lg sm:text-xl text-walnut italic leading-relaxed">
                   “Every act of charity begins long before the donation itself. It begins with intention.”
                 </p>
               </motion.blockquote>
@@ -572,7 +572,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.95 }}
-                className="font-sans text-sm sm:text-base text-walnut/97 leading-relaxed font-normal"
+                className="font-sans text-sm sm:text-base text-walnut leading-relaxed font-normal"
               >
                 Mizan is a quiet companion for cultivating the habit of generosity. Keep track of your acts of charity, reflect on your intentions, and build a rhythm of giving that grows through sincerity, not size.
               </motion.p>
@@ -625,9 +625,70 @@ export default function App() {
                       className="w-8 h-8 rounded-full border-2 border-ivory bg-gold relative z-20"
                     />
                   </div>
-                  <p className="text-[10px] font-sans uppercase tracking-wider opacity-75 hover:opacity-100 text-coffee transition-opacity duration-300">
+                  <p className="text-[10px] font-sans uppercase tracking-wider opacity-90 hover:opacity-100 text-coffee transition-opacity duration-300">
                     12k+ Companions on the path
                   </p>
+                </motion.div>
+              </motion.div>
+
+              {/* Glaring "Coming Soon" App Store badges, moved from footer into the hero for maximum visibility */}
+              <motion.div
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 1.3 }}
+                className="flex flex-wrap items-center gap-3 pt-2"
+              >
+                {/* Apple App Store badge - true Apple black */}
+                <motion.div
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  animate={{ boxShadow: [
+                    '0 0 0px rgba(0,0,0,0.0)',
+                    '0 6px 22px rgba(0,0,0,0.35)',
+                    '0 0 0px rgba(0,0,0,0.0)'
+                  ] }}
+                  transition={{ boxShadow: { duration: 2.6, repeat: Infinity, ease: 'easeInOut' } }}
+                  className="flex items-center gap-2.5 bg-black text-white rounded-xl px-4 py-2.5 cursor-pointer select-none border border-black"
+                >
+                  <svg viewBox="0 0 384 512" className="w-5 h-5 fill-white shrink-0">
+                    <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27-32.1 24.5-61.2 23.7-71.6-23.8 1.4-51.3 16.4-67 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 68.9-35.2z"/>
+                  </svg>
+                  <div className="flex flex-col items-start leading-none">
+                    <span className="font-sans text-[9px] tracking-[0.15em] uppercase text-white/80 font-semibold">Coming Soon</span>
+                    <span className="font-sans text-sm font-bold text-white">App Store</span>
+                  </div>
+                </motion.div>
+
+                {/* Google Play badge - true Play Store multicolor triangle */}
+                <motion.div
+                  whileHover={{ scale: 1.04, y: -2 }}
+                  animate={{ boxShadow: [
+                    '0 0 0px rgba(0,0,0,0.0)',
+                    '0 6px 22px rgba(0,0,0,0.35)',
+                    '0 0 0px rgba(0,0,0,0.0)'
+                  ] }}
+                  transition={{ boxShadow: { duration: 2.6, repeat: Infinity, ease: 'easeInOut', delay: 1.3 } }}
+                  className="flex items-center gap-2.5 bg-black text-white rounded-xl px-4 py-2.5 cursor-pointer select-none border border-black"
+                >
+                  <svg viewBox="0 0 512 512" className="w-5 h-5 shrink-0">
+                    <defs>
+                      <linearGradient id="playBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#00E1FF" />
+                        <stop offset="100%" stopColor="#00A0FF" />
+                      </linearGradient>
+                      <linearGradient id="playYellow" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stopColor="#FFE000" />
+                        <stop offset="100%" stopColor="#FFBD00" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M99 20 L340 256 L99 492 C86 480 80 464 80 448 L80 64 C80 48 86 32 99 20 Z" fill="url(#playBlue)"/>
+                    <path d="M340 256 L99 20 C104 17 111 15 118 15 C127 15 136 18 144 23 L400 168 Z" fill="url(#playYellow)"/>
+                    <path d="M400 168 C424 181 432 210 419 234 C415 242 409 249 400 254 L340 256 Z" fill="#FF3D57"/>
+                    <path d="M400 254 L144 489 C136 494 127 497 118 497 C111 497 104 495 99 492 L340 256 Z" fill="#00F076"/>
+                  </svg>
+                  <div className="flex flex-col items-start leading-none">
+                    <span className="font-sans text-[9px] tracking-[0.15em] uppercase text-white/80 font-semibold">Coming Soon</span>
+                    <span className="font-sans text-sm font-bold text-white">Google Play</span>
+                  </div>
                 </motion.div>
               </motion.div>
             </div>
@@ -696,9 +757,9 @@ export default function App() {
                   <div className="flex justify-between items-center border-b border-sand pb-2 mt-1">
                     <div className="flex items-center space-x-1">
                       <div className="w-1.5 h-1.5 rounded-full bg-olive animate-pulse" />
-                      <span className="font-mono text-[8px] text-coffee/95 uppercase tracking-widest">Mizan</span>
+                      <span className="font-mono text-[8px] text-coffee uppercase tracking-widest">Mizan</span>
                     </div>
-                    <span className="font-mono text-[8px] text-coffee/95">05:41 AM (Fajr)</span>
+                    <span className="font-mono text-[8px] text-coffee">05:41 AM (Fajr)</span>
                   </div>
 
                   {/* Simulated Glass Jar Visual inside phone */}
@@ -764,15 +825,15 @@ export default function App() {
                         />
                       </div>
 
-                      <Heart className={`w-5 h-5 relative z-10 transition-colors duration-500 ${hasGivenToday ? 'text-terracotta animate-pulse' : 'text-coffee/55'}`} />
-                      <span className="font-mono text-[7px] text-coffee/95 tracking-wider relative z-10 uppercase mt-1">Sincerity</span>
+                      <Heart className={`w-5 h-5 relative z-10 transition-colors duration-500 ${hasGivenToday ? 'text-terracotta animate-pulse' : 'text-coffee'}`} />
+                      <span className="font-mono text-[7px] text-coffee tracking-wider relative z-10 uppercase mt-1">Sincerity</span>
                     </div>
 
                     <div className="text-center space-y-0.5">
                       <p className="font-serif text-[11px] text-walnut font-semibold">
                         {hasGivenToday ? "Sadaqah Logged Quietly" : "Quiet Vessel Ready"}
                       </p>
-                      <p className="font-mono text-[7.5px] text-coffee/93">
+                      <p className="font-mono text-[7.5px] text-coffee">
                         {hasGivenToday ? "The morning angels bear witness" : "A single drop starts an ocean"}
                       </p>
                     </div>
@@ -826,7 +887,7 @@ export default function App() {
                         <p className="font-serif italic text-[11px] text-terracotta font-medium">
                           “Sincerity is safe.”
                         </p>
-                        <p className="font-mono text-[7.5px] text-coffee/95 uppercase tracking-widest">
+                        <p className="font-mono text-[7.5px] text-coffee uppercase tracking-widest">
                           Your quiet habit is kept
                         </p>
                       </motion.div>
@@ -939,7 +1000,7 @@ export default function App() {
                 <p className="font-serif text-xl text-walnut italic leading-relaxed">
                   “{corePhilosophy.quote}”
                 </p>
-                <footer className="font-mono text-xs text-coffee/95">
+                <footer className="font-mono text-xs text-coffee">
                   — {corePhilosophy.quoteRef}
                 </footer>
               </blockquote>
@@ -962,7 +1023,7 @@ export default function App() {
                 <h4 className="font-serif text-xl font-semibold text-walnut">
                   {pillar.title}
                 </h4>
-                <p className="font-sans text-sm text-walnut/97 leading-relaxed font-normal">
+                <p className="font-sans text-sm text-walnut leading-relaxed font-normal">
                   {pillar.description}
                 </p>
               </motion.div>
@@ -1001,7 +1062,7 @@ export default function App() {
               <motion.h3 variants={revealItem} className="font-serif text-3xl sm:text-4xl text-walnut leading-tight italic">
                 Gentle reminders, at meaningful times.
               </motion.h3>
-              <motion.p variants={revealItem} className="font-sans text-base text-walnut/97 leading-relaxed font-normal">
+              <motion.p variants={revealItem} className="font-sans text-base text-walnut leading-relaxed font-normal">
                 Islam teaches us that certain times carry a unique closeness to our prayers and charity. 
                 Mizan offers thoughtful reminders during these times, helping you build the habit of giving without interrupting your day.
               </motion.p>
@@ -1042,7 +1103,7 @@ export default function App() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          className="font-sans text-xs text-walnut/97 mt-3 leading-relaxed overflow-hidden font-normal"
+                          className="font-sans text-xs text-walnut mt-3 leading-relaxed overflow-hidden font-normal"
                         >
                           {item.description}
                         </motion.p>
@@ -1073,7 +1134,7 @@ export default function App() {
                     <p className="font-serif text-lg text-walnut italic leading-relaxed px-4">
                       O Allah! Compensate every person who spends in Your Cause
                     </p>
-                    <p className="font-mono text-[9px] text-walnut/97">Sahih al-Bukhari 1442</p>
+                    <p className="font-mono text-[9px] text-walnut">Sahih al-Bukhari 1442</p>
                   </div>
                 </div>
 
@@ -1100,7 +1161,7 @@ export default function App() {
           <motion.p variants={quoteReveal} className="font-serif text-3xl sm:text-4xl text-walnut italic leading-relaxed">
             “The believer’s shade on the Day of Resurrection will be their charity.”
           </motion.p>
-          <motion.span variants={quoteReveal} className="font-mono text-xs tracking-widest text-coffee/95 uppercase block">
+          <motion.span variants={quoteReveal} className="font-mono text-xs tracking-widest text-coffee uppercase block">
             Prophet Muhammad (ﷺ) &bull; Musnad Ahmad
           </motion.span>
         </motion.section>
@@ -1129,7 +1190,7 @@ export default function App() {
               <h3 className="font-serif text-3xl md:text-4xl text-walnut leading-tight italic">
                 Nurture a quiet, lifelong habit.
               </h3>
-              <p className="font-sans text-sm text-coffee/97 max-w-md mx-auto leading-relaxed">
+              <p className="font-sans text-sm text-coffee max-w-md mx-auto leading-relaxed">
                 Join our private beta circles. No promotional spam, no invasive tracking. 
                 Just an elegant companion to remind you of why giving matters.
               </p>
@@ -1160,7 +1221,7 @@ export default function App() {
                       className={`absolute left-4 transition-all duration-300 pointer-events-none origin-top-left
                         ${email 
                           ? 'top-1 text-[10px] uppercase tracking-wider text-terracotta font-semibold' 
-                          : 'top-3.5 text-sm text-coffee/92 peer-focus:top-1 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-wider peer-focus:text-terracotta peer-focus:font-semibold'
+                          : 'top-3.5 text-sm text-coffee peer-focus:top-1 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-wider peer-focus:text-terracotta peer-focus:font-semibold'
                         }`}
                     >
                       Enter your email address
@@ -1205,7 +1266,7 @@ export default function App() {
                     </motion.div>
                   </div>
                   <h4 className="font-serif text-xl text-walnut font-medium">You are in the Circle.</h4>
-                  <p className="font-sans text-xs text-coffee/93 leading-relaxed">
+                  <p className="font-sans text-xs text-coffee leading-relaxed">
                     We have recorded your email with sincerity. As we approach our quiet release, 
                     we will reach out with your personal invitation.
                   </p>
@@ -1213,7 +1274,7 @@ export default function App() {
               )}
             </AnimatePresence>
 
-            <p className="font-mono text-[10px] text-coffee/92 relative z-10 text-center md:text-left">
+            <p className="font-mono text-[10px] text-coffee relative z-10 text-center md:text-left">
               Mizan values your absolute privacy. Your data is encrypted and never sold.
             </p>
           </motion.div>
@@ -1243,35 +1304,19 @@ export default function App() {
                 dotColor="#B08D57"
                 strokeWidth={18}
               />
-              <span className="font-serif text-lg font-semibold text-walnut">
+              <span className="font-serif text-xl font-semibold text-walnut">
                 Mizan<span className="text-terracotta font-serif"></span>
               </span>
             </div>
-            <p className="font-serif text-md italic text-walnut/85 leading-relaxed">
+            <p className="font-serif text-lg italic text-walnut leading-relaxed">
               “Small drops, eternal oceans.”
             </p>
-
-            {/* Coming soon to app stores */}
-            <div className="flex items-center justify-center md:justify-start gap-2 pt-1">
-              {[
-                { label: 'App Store', sub: 'Coming soon' },
-                { label: 'Google Play', sub: 'Coming soon' }
-              ].map((store, idx) => (
-                <div
-                  key={idx}
-                  className="flex flex-col items-start justify-center border border-sand/70 bg-white/40 rounded-lg px-2.5 py-1.5 opacity-90 select-none"
-                >
-                  <span className="font-mono text-[8px] tracking-wider uppercase text-coffee/80 leading-none">{store.sub}</span>
-                  <span className="font-sans text-[11px] font-medium text-walnut leading-tight">{store.label}</span>
-                </div>
-              ))}
-            </div>
           </motion.div>
 
           {/* Column 2 (The Journey) */}
           <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-3 w-full max-w-[320px] md:max-w-none">
-            <h4 className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold text-bronze">Explore</h4>
-            <ul className="space-y-2 font-sans text-xs">
+            <h4 className="font-sans text-xs tracking-[0.18em] uppercase font-bold text-bronze">Explore</h4>
+            <ul className="space-y-2.5 font-sans text-sm">
               {[
                 { href: '#philosophy', label: 'The Why' },
                 { href: '#interactive-jar', label: 'The Journey' },
@@ -1279,7 +1324,7 @@ export default function App() {
                 { href: '#rythms', label: 'The Community' }
               ].map((link, idx) => (
                 <li key={idx}>
-                  <a href={link.href} className="relative py-0.5 group text-coffee/95 hover:text-walnut transition-colors inline-block">
+                  <a href={link.href} className="relative py-0.5 group text-coffee hover:text-walnut transition-colors inline-block">
                     <span>{link.label}</span>
                     <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-walnut transition-all duration-300 group-hover:w-full" />
                   </a>
@@ -1290,15 +1335,15 @@ export default function App() {
 
           {/* Column 3 (Trust) */}
           <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-3 w-full max-w-[320px] md:max-w-none">
-            <h4 className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold text-bronze">Trust</h4>
-            <ul className="space-y-2 font-sans text-xs">
+            <h4 className="font-sans text-xs tracking-[0.18em] uppercase font-bold text-bronze">Trust</h4>
+            <ul className="space-y-2.5 font-sans text-sm">
               {[
                 { href: '#', label: 'Privacy Sanctum' },
                 { href: '#', label: 'Clean Giving Manifesto' },
                 { href: '#', label: 'Terms of Sincerity' }
               ].map((link, idx) => (
                 <li key={idx}>
-                  <a href={link.href} className="relative py-0.5 group text-coffee/95 hover:text-walnut transition-colors inline-block">
+                  <a href={link.href} className="relative py-0.5 group text-coffee hover:text-walnut transition-colors inline-block">
                     <span>{link.label}</span>
                     <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-walnut transition-all duration-300 group-hover:w-full" />
                   </a>
@@ -1309,9 +1354,9 @@ export default function App() {
 
           {/* Column 4 (Stay Close) */}
           <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-3 w-full max-w-[320px] md:max-w-none">
-            <h4 className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold text-bronze">Stay close</h4>
+            <h4 className="font-sans text-xs tracking-[0.18em] uppercase font-bold text-bronze">Stay close</h4>
             <div className="space-y-2.5">
-              <p className="font-serif text-md text-walnut italic">12K+ companions on the path</p>
+              <p className="font-serif text-lg text-walnut italic">12K+ companions on the path</p>
               
               {/* Reused avatar stack from hero */}
               <motion.div 
@@ -1349,8 +1394,8 @@ export default function App() {
 
         {/* Bottom copyright segment */}
         <div className="max-w-6xl mx-auto px-6 pt-4 flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-left">
-          <p className="font-mono text-[10px] text-coffee/92">
-            &copy; 2026 Mizan. 
+          <p className="font-mono text-xs text-coffee">
+            &copy; 2026 Mizan. All rights reserved.
           </p>
         </div>
 
