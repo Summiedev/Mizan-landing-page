@@ -149,7 +149,7 @@ export default function App() {
     e.preventDefault();
     if (!email.trim() || !email.includes('@')) return;
 
-    const waitlistEndpoint = (import.meta as any).env?.VITE_WAITLIST_ENDPOINT?.trim?.();
+    const waitlistEndpoint = (import.meta as any).env?.VITE_WAITLIST_ENDPOINT?.trim?.() || '/api/waitlist';
     const payload = {
       email: email.trim(),
       timestamp: new Date().toISOString(),
@@ -381,7 +381,7 @@ export default function App() {
                   }
                 }}
               >
-                <a href={link.href} className="relative py-1 group text-coffee/85 hover:text-walnut transition-colors">
+                <a href={link.href} className="relative py-1 group text-coffee/95 hover:text-walnut transition-colors">
                   <span>{link.label}</span>
                   <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-walnut transition-all duration-300 group-hover:w-full" />
                 </a>
@@ -417,7 +417,7 @@ export default function App() {
                     <MizanIcon className="w-6 h-6 text-bronze" strokeColor="currentColor" dotColor="#B08D57" strokeWidth={16} />
                     <div>
                       <p className="font-serif text-base text-walnut leading-none">Quick access</p>
-                      <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-coffee/60 mt-1">Navigate Mizan</p>
+                      <p className="font-mono text-[9px] uppercase tracking-[0.22em] text-coffee/80 mt-1">Navigate Mizan</p>
                     </div>
                   </div>
                   <button
@@ -470,7 +470,7 @@ export default function App() {
       <main className="flex-1 w-full max-w-6xl mx-auto px-6 relative z-10">
 
         {/* 1. The Poetic Invitation (Redesigned Cinematic Hero) */}
-        <section id="hero" className="pt-6 pb-14 md:pt-10 md:pb-20 lg:pt-12 lg:pb-24 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative overflow-visible">
+        <section id="hero" className="pt-4 pb-10 md:pt-8 md:pb-16 lg:pt-10 lg:pb-20 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative overflow-visible">
           
           {/* Ambient light source shifting based on cursor movement */}
           <motion.div 
@@ -563,7 +563,7 @@ export default function App() {
                   style={{ originY: 0 }}
                   className="absolute left-0 top-0 bottom-0 w-0.5 bg-clay"
                 />
-                <p className="font-serif text-lg sm:text-xl text-walnut/90 italic leading-relaxed">
+                <p className="font-serif text-lg sm:text-xl text-walnut/97 italic leading-relaxed">
                   “Every act of charity begins long before the donation itself. It begins with intention.”
                 </p>
               </motion.blockquote>
@@ -572,7 +572,7 @@ export default function App() {
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.0, ease: [0.16, 1, 0.3, 1], delay: 0.95 }}
-                className="font-sans text-sm sm:text-base text-walnut/90 leading-relaxed font-normal"
+                className="font-sans text-sm sm:text-base text-walnut/97 leading-relaxed font-normal"
               >
                 Mizan is a quiet companion for cultivating the habit of generosity. Keep track of your acts of charity, reflect on your intentions, and build a rhythm of giving that grows through sincerity, not size.
               </motion.p>
@@ -696,9 +696,9 @@ export default function App() {
                   <div className="flex justify-between items-center border-b border-sand pb-2 mt-1">
                     <div className="flex items-center space-x-1">
                       <div className="w-1.5 h-1.5 rounded-full bg-olive animate-pulse" />
-                      <span className="font-mono text-[8px] text-coffee/85 uppercase tracking-widest">Mizan</span>
+                      <span className="font-mono text-[8px] text-coffee/95 uppercase tracking-widest">Mizan</span>
                     </div>
-                    <span className="font-mono text-[8px] text-coffee/85">05:41 AM (Fajr)</span>
+                    <span className="font-mono text-[8px] text-coffee/95">05:41 AM (Fajr)</span>
                   </div>
 
                   {/* Simulated Glass Jar Visual inside phone */}
@@ -764,15 +764,15 @@ export default function App() {
                         />
                       </div>
 
-                      <Heart className={`w-5 h-5 relative z-10 transition-colors duration-500 ${hasGivenToday ? 'text-terracotta animate-pulse' : 'text-coffee/35'}`} />
-                      <span className="font-mono text-[7px] text-coffee/85 tracking-wider relative z-10 uppercase mt-1">Sincerity</span>
+                      <Heart className={`w-5 h-5 relative z-10 transition-colors duration-500 ${hasGivenToday ? 'text-terracotta animate-pulse' : 'text-coffee/55'}`} />
+                      <span className="font-mono text-[7px] text-coffee/95 tracking-wider relative z-10 uppercase mt-1">Sincerity</span>
                     </div>
 
                     <div className="text-center space-y-0.5">
                       <p className="font-serif text-[11px] text-walnut font-semibold">
                         {hasGivenToday ? "Sadaqah Logged Quietly" : "Quiet Vessel Ready"}
                       </p>
-                      <p className="font-mono text-[7.5px] text-coffee/80">
+                      <p className="font-mono text-[7.5px] text-coffee/93">
                         {hasGivenToday ? "The morning angels bear witness" : "A single drop starts an ocean"}
                       </p>
                     </div>
@@ -826,7 +826,7 @@ export default function App() {
                         <p className="font-serif italic text-[11px] text-terracotta font-medium">
                           “Sincerity is safe.”
                         </p>
-                        <p className="font-mono text-[7.5px] text-coffee/85 uppercase tracking-widest">
+                        <p className="font-mono text-[7.5px] text-coffee/95 uppercase tracking-widest">
                           Your quiet habit is kept
                         </p>
                       </motion.div>
@@ -909,7 +909,7 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="py-16 md:py-24 border-t border-sand/50"
+          className="py-12 md:py-20 border-t border-sand/50"
         >
           <motion.div variants={revealItem}>
             <InteractiveJar />
@@ -923,7 +923,7 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="py-20 md:py-28 border-t border-sand/50 space-y-16"
+          className="py-14 md:py-24 border-t border-sand/50 space-y-12"
         >
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
             <motion.div variants={revealItem} className="md:col-span-5">
@@ -939,7 +939,7 @@ export default function App() {
                 <p className="font-serif text-xl text-walnut italic leading-relaxed">
                   “{corePhilosophy.quote}”
                 </p>
-                <footer className="font-mono text-xs text-coffee/85">
+                <footer className="font-mono text-xs text-coffee/95">
                   — {corePhilosophy.quoteRef}
                 </footer>
               </blockquote>
@@ -962,7 +962,7 @@ export default function App() {
                 <h4 className="font-serif text-xl font-semibold text-walnut">
                   {pillar.title}
                 </h4>
-                <p className="font-sans text-sm text-walnut/90 leading-relaxed font-normal">
+                <p className="font-sans text-sm text-walnut/97 leading-relaxed font-normal">
                   {pillar.description}
                 </p>
               </motion.div>
@@ -977,7 +977,7 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="pt-6 pb-16 md:pt-8 md:pb-24 border-t border-sand/50"
+          className="pt-5 pb-12 md:pt-6 md:pb-20 border-t border-sand/50"
         >
           <motion.div variants={revealItem}>
             <AppScreenshots />
@@ -991,9 +991,9 @@ export default function App() {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={staggerContainer}
-          className="py-20 md:py-28 border-t border-sand/50"
+          className="py-14 md:py-24 border-t border-sand/50"
         >
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             <div className="lg:col-span-6 space-y-6">
               <motion.span variants={revealItem} className="font-mono text-xs tracking-[0.2em] text-bronze uppercase block">
                 MOMENTS THAT MATTER
@@ -1001,7 +1001,7 @@ export default function App() {
               <motion.h3 variants={revealItem} className="font-serif text-3xl sm:text-4xl text-walnut leading-tight italic">
                 Gentle reminders, at meaningful times.
               </motion.h3>
-              <motion.p variants={revealItem} className="font-sans text-base text-walnut/90 leading-relaxed font-normal">
+              <motion.p variants={revealItem} className="font-sans text-base text-walnut/97 leading-relaxed font-normal">
                 Islam teaches us that certain times carry a unique closeness to our prayers and charity. 
                 Mizan offers thoughtful reminders during these times, helping you build the habit of giving without interrupting your day.
               </motion.p>
@@ -1042,7 +1042,7 @@ export default function App() {
                           initial={{ height: 0, opacity: 0 }}
                           animate={{ height: 'auto', opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
-                          className="font-sans text-xs text-walnut/90 mt-3 leading-relaxed overflow-hidden font-normal"
+                          className="font-sans text-xs text-walnut/97 mt-3 leading-relaxed overflow-hidden font-normal"
                         >
                           {item.description}
                         </motion.p>
@@ -1073,7 +1073,7 @@ export default function App() {
                     <p className="font-serif text-lg text-walnut italic leading-relaxed px-4">
                       O Allah! Compensate every person who spends in Your Cause
                     </p>
-                    <p className="font-mono text-[9px] text-walnut/90">Sahih al-Bukhari 1442</p>
+                    <p className="font-mono text-[9px] text-walnut/97">Sahih al-Bukhari 1442</p>
                   </div>
                 </div>
 
@@ -1095,12 +1095,12 @@ export default function App() {
           className="py-12 border-t border-sand/50 text-center space-y-6 max-w-3xl mx-auto"
         >
           <motion.div variants={quoteReveal}>
-            <Quote className="w-10 h-10 text-clay/30 mx-auto" />
+            <Quote className="w-10 h-10 text-clay/45 mx-auto" />
           </motion.div>
           <motion.p variants={quoteReveal} className="font-serif text-3xl sm:text-4xl text-walnut italic leading-relaxed">
             “The believer’s shade on the Day of Resurrection will be their charity.”
           </motion.p>
-          <motion.span variants={quoteReveal} className="font-mono text-xs tracking-widest text-coffee/85 uppercase block">
+          <motion.span variants={quoteReveal} className="font-mono text-xs tracking-widest text-coffee/95 uppercase block">
             Prophet Muhammad (ﷺ) &bull; Musnad Ahmad
           </motion.span>
         </motion.section>
@@ -1116,7 +1116,7 @@ export default function App() {
         >
           <motion.div 
             variants={cardReveal}
-            className="w-full max-w-2xl bg-white/70 border border-sand rounded-3xl p-8 md:p-12 text-center space-y-8 shadow-tactile relative overflow-hidden"
+            className="w-full max-w-2xl bg-white/70 border border-sand rounded-3xl p-6 md:p-10 text-center space-y-6 shadow-tactile relative overflow-hidden"
           >
             
             {/* Soft backdrop geometry */}
@@ -1129,7 +1129,7 @@ export default function App() {
               <h3 className="font-serif text-3xl md:text-4xl text-walnut leading-tight italic">
                 Nurture a quiet, lifelong habit.
               </h3>
-              <p className="font-sans text-sm text-coffee/90 max-w-md mx-auto leading-relaxed">
+              <p className="font-sans text-sm text-coffee/97 max-w-md mx-auto leading-relaxed">
                 Join our private beta circles. No promotional spam, no invasive tracking. 
                 Just an elegant companion to remind you of why giving matters.
               </p>
@@ -1160,7 +1160,7 @@ export default function App() {
                       className={`absolute left-4 transition-all duration-300 pointer-events-none origin-top-left
                         ${email 
                           ? 'top-1 text-[10px] uppercase tracking-wider text-terracotta font-semibold' 
-                          : 'top-3.5 text-sm text-coffee/75 peer-focus:top-1 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-wider peer-focus:text-terracotta peer-focus:font-semibold'
+                          : 'top-3.5 text-sm text-coffee/92 peer-focus:top-1 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-wider peer-focus:text-terracotta peer-focus:font-semibold'
                         }`}
                     >
                       Enter your email address
@@ -1205,7 +1205,7 @@ export default function App() {
                     </motion.div>
                   </div>
                   <h4 className="font-serif text-xl text-walnut font-medium">You are in the Circle.</h4>
-                  <p className="font-sans text-xs text-coffee/80 leading-relaxed">
+                  <p className="font-sans text-xs text-coffee/93 leading-relaxed">
                     We have recorded your email with sincerity. As we approach our quiet release, 
                     we will reach out with your personal invitation.
                   </p>
@@ -1213,7 +1213,7 @@ export default function App() {
               )}
             </AnimatePresence>
 
-            <p className="font-mono text-[10px] text-coffee/75 relative z-10 text-center md:text-left">
+            <p className="font-mono text-[10px] text-coffee/92 relative z-10 text-center md:text-left">
               Mizan values your absolute privacy. Your data is encrypted and never sold.
             </p>
           </motion.div>
@@ -1227,18 +1227,18 @@ export default function App() {
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
         variants={footerContainer}
-        className="border-t border-sand/40 bg-parchment/30 pt-12 pb-8 relative overflow-hidden"
+        className="border-t border-sand/40 bg-parchment/30 pt-10 pb-6 md:pt-12 md:pb-8 relative overflow-hidden"
       >
         {/* Subtle top border glow to visually separate it from the page without a harsh line */}
         <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-terracotta/20 to-transparent" />
         
-        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 pb-8 border-b border-sand/10 justify-items-center md:justify-items-stretch">
+        <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-8 pb-6 border-b border-sand/10 justify-items-center md:justify-items-stretch">
           
           {/* Column 1 (Brand) */}
-          <motion.div variants={footerColumn} className="md:col-span-3 space-y-4 text-center md:text-left w-full max-w-[320px] md:max-w-none">
+          <motion.div variants={footerColumn} className="md:col-span-3 space-y-3 text-center md:text-left w-full max-w-[320px] md:max-w-none">
             <div className="flex items-center justify-center md:justify-start space-x-2">
               <MizanIcon 
-                className="w-6 h-6 text-bronze/80" 
+                className="w-6 h-6 text-bronze/90" 
                 strokeColor="currentColor"
                 dotColor="#B08D57"
                 strokeWidth={18}
@@ -1247,15 +1247,31 @@ export default function App() {
                 Mizan<span className="text-terracotta font-serif"></span>
               </span>
             </div>
-            <p className="font-serif text-md italic text-walnut/70 leading-relaxed">
+            <p className="font-serif text-md italic text-walnut/85 leading-relaxed">
               “Small drops, eternal oceans.”
             </p>
+
+            {/* Coming soon to app stores */}
+            <div className="flex items-center justify-center md:justify-start gap-2 pt-1">
+              {[
+                { label: 'App Store', sub: 'Coming soon' },
+                { label: 'Google Play', sub: 'Coming soon' }
+              ].map((store, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-start justify-center border border-sand/70 bg-white/40 rounded-lg px-2.5 py-1.5 opacity-90 select-none"
+                >
+                  <span className="font-mono text-[8px] tracking-wider uppercase text-coffee/80 leading-none">{store.sub}</span>
+                  <span className="font-sans text-[11px] font-medium text-walnut leading-tight">{store.label}</span>
+                </div>
+              ))}
+            </div>
           </motion.div>
 
           {/* Column 2 (The Journey) */}
-          <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-4 w-full max-w-[320px] md:max-w-none">
+          <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-3 w-full max-w-[320px] md:max-w-none">
             <h4 className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold text-bronze">Explore</h4>
-            <ul className="space-y-2.5 font-sans text-xs">
+            <ul className="space-y-2 font-sans text-xs">
               {[
                 { href: '#philosophy', label: 'The Why' },
                 { href: '#interactive-jar', label: 'The Journey' },
@@ -1263,7 +1279,7 @@ export default function App() {
                 { href: '#rythms', label: 'The Community' }
               ].map((link, idx) => (
                 <li key={idx}>
-                  <a href={link.href} className="relative py-0.5 group text-coffee/85 hover:text-walnut transition-colors inline-block">
+                  <a href={link.href} className="relative py-0.5 group text-coffee/95 hover:text-walnut transition-colors inline-block">
                     <span>{link.label}</span>
                     <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-walnut transition-all duration-300 group-hover:w-full" />
                   </a>
@@ -1273,16 +1289,16 @@ export default function App() {
           </motion.div>
 
           {/* Column 3 (Trust) */}
-          <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-4 w-full max-w-[320px] md:max-w-none">
+          <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-3 w-full max-w-[320px] md:max-w-none">
             <h4 className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold text-bronze">Trust</h4>
-            <ul className="space-y-2.5 font-sans text-xs">
+            <ul className="space-y-2 font-sans text-xs">
               {[
                 { href: '#', label: 'Privacy Sanctum' },
                 { href: '#', label: 'Clean Giving Manifesto' },
                 { href: '#', label: 'Terms of Sincerity' }
               ].map((link, idx) => (
                 <li key={idx}>
-                  <a href={link.href} className="relative py-0.5 group text-coffee/85 hover:text-walnut transition-colors inline-block">
+                  <a href={link.href} className="relative py-0.5 group text-coffee/95 hover:text-walnut transition-colors inline-block">
                     <span>{link.label}</span>
                     <span className="absolute bottom-0 left-0 w-0 h-[1px] bg-walnut transition-all duration-300 group-hover:w-full" />
                   </a>
@@ -1292,10 +1308,10 @@ export default function App() {
           </motion.div>
 
           {/* Column 4 (Stay Close) */}
-          <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-4 w-full max-w-[320px] md:max-w-none">
+          <motion.div variants={footerColumn} className="md:col-span-3 text-center md:text-left space-y-3 w-full max-w-[320px] md:max-w-none">
             <h4 className="font-sans text-[10px] tracking-[0.2em] uppercase font-bold text-bronze">Stay close</h4>
-            <div className="space-y-3">
-              <p className="font-serif text-md text-walnut/95 italic">12K+ companions on the path</p>
+            <div className="space-y-2.5">
+              <p className="font-serif text-md text-walnut italic">12K+ companions on the path</p>
               
               {/* Reused avatar stack from hero */}
               <motion.div 
@@ -1332,8 +1348,8 @@ export default function App() {
         </div>
 
         {/* Bottom copyright segment */}
-        <div className="max-w-6xl mx-auto px-6 pt-6 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
-          <p className="font-mono text-[10px] text-coffee/75">
+        <div className="max-w-6xl mx-auto px-6 pt-4 flex flex-col md:flex-row justify-between items-center gap-3 text-center md:text-left">
+          <p className="font-mono text-[10px] text-coffee/92">
             &copy; 2026 Mizan. 
           </p>
         </div>
@@ -1345,10 +1361,3 @@ export default function App() {
     </div>
   );
 }
-
-
-
-
-
-
-

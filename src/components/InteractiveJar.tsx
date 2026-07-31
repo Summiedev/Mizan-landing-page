@@ -287,7 +287,7 @@ export default function InteractiveJar() {
   return (
     <div 
       id="interactive-jar-experience" 
-      className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center relative"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center relative"
     >
       {/* Floating ceremonial drop layer (Coordinates calculated dynamically in React) */}
       <AnimatePresence>
@@ -341,7 +341,7 @@ export default function InteractiveJar() {
           <h2 className="font-serif text-4xl sm:text-5xl text-walnut leading-tight italic">
             Begin with a single drop.
           </h2>
-          <p className="font-sans text-base text-coffee/90 max-w-xl leading-relaxed font-normal">
+          <p className="font-sans text-base text-coffee/97 max-w-xl leading-relaxed font-normal">
             Click one of the intents below to place a virtual deed into the ceramic jar. 
             Experience the soft physical sound of giving, reflect on the scripture revealed, 
             and write a quiet reflection.
@@ -393,7 +393,7 @@ export default function InteractiveJar() {
                   <p className="font-sans text-sm font-medium text-walnut transition-colors duration-300">
                     {type.label}
                   </p>
-                  <p className="font-sans text-xs text-coffee/95 truncate">
+                  <p className="font-sans text-xs text-coffee truncate">
                     {isSelected ? 'Focusing intent...' : 'Drop inside'}
                   </p>
                 </div>
@@ -421,14 +421,14 @@ export default function InteractiveJar() {
                 <span className="font-mono text-[10px] tracking-wider text-terracotta uppercase border border-terracotta/30 px-2 py-0.5 rounded">
                   {activeVerse.type === 'quran' ? 'Al-Qur’an' : 'Hadith'}
                 </span>
-                <span className="font-mono text-[10px] text-walnut/90">
+                <span className="font-mono text-[10px] text-walnut/97">
                   {activeVerse.reference}
                 </span>
               </div>
               <p className="font-serif text-xl sm:text-2xl text-right text-walnut leading-relaxed font-normal tracking-wide" dir="rtl">
                 {activeVerse.text}
               </p>
-              <p className="font-sans text-sm text-walnut/90 leading-relaxed font-normal italic">
+              <p className="font-sans text-sm text-walnut/97 leading-relaxed font-normal italic">
                 “{activeVerse.translation}”
               </p>
             </motion.div>
@@ -440,7 +440,7 @@ export default function InteractiveJar() {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <span className="w-1.5 h-1.5 rounded-full bg-olive"></span>
-              <span className="font-mono text-[11px] text-coffee/90 font-semibold uppercase tracking-wider">
+              <span className="font-mono text-[11px] text-coffee/97 font-semibold uppercase tracking-wider">
                 Daily Reflection Prompt
               </span>
             </div>
@@ -462,10 +462,10 @@ export default function InteractiveJar() {
                     value={reflectionText}
                     onChange={(e) => setReflectionText(e.target.value)}
                     placeholder="Write a private, sincere note here..."
-                    className="w-full p-3 text-sm font-sans bg-white border border-sand rounded-xl focus:outline-none focus:border-bronze min-h-[80px] resize-none transition-all placeholder:text-coffee/75 text-walnut"
+                    className="w-full p-3 text-sm font-sans bg-white border border-sand rounded-xl focus:outline-none focus:border-bronze min-h-[80px] resize-none transition-all placeholder:text-coffee/92 text-walnut"
                   />
                   <div className="flex justify-between items-center">
-                    <span className="font-mono text-[10px] text-coffee/85 font-medium">Only visible to you.</span>
+                    <span className="font-mono text-[10px] text-coffee/95 font-medium">Only visible to you.</span>
                     <button
                       type="submit"
                       disabled={!reflectionText.trim()}
@@ -489,7 +489,7 @@ export default function InteractiveJar() {
                   </div>
                   <div>
                     <h4 className="font-sans text-xs font-semibold text-olive">Reflection Saved</h4>
-                    <p className="font-sans text-xs text-walnut/90 mt-1 leading-relaxed">
+                    <p className="font-sans text-xs text-walnut/97 mt-1 leading-relaxed">
                       Your quiet note is folded into your local Sadaqah Jar. Just like a physical paper scroll placed inside.
                     </p>
                     <button
@@ -547,7 +547,11 @@ export default function InteractiveJar() {
             </AnimatePresence>
 
             {/* The Outer Ceramic Jar Shape using highly custom SVG and gradients */}
-            <svg viewBox="0 0 300 400" className="w-full h-full filter drop-shadow-xl select-none">
+            {/* Drop-shadow lives on this wrapper (not the svg itself) — applying a CSS filter
+                directly to an svg that also contains a clipPath causes jagged/zigzag edges on
+                mobile WebKit browsers. Wrapping it keeps the same visual shadow without the bug. */}
+            <div className="w-full h-full drop-shadow-xl">
+            <svg viewBox="0 0 300 400" className="w-full h-full select-none">
               <defs>
                 {/* Clay Material Gradient */}
                 <linearGradient id="clay-grad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -697,6 +701,7 @@ export default function InteractiveJar() {
                 <circle cx="256" cy="256" r="18" fill="#dfba6b" stroke="none"/>
               </g>
             </svg>
+            </div>
 
             {/* Soft ambient ripple blur behind the jar */}
             <AnimatePresence>
@@ -719,7 +724,7 @@ export default function InteractiveJar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-clay opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-clay"></span>
             </span>
-            <span className="font-mono text-xs text-coffee/95 font-medium tracking-wider select-none">
+            <span className="font-mono text-xs text-coffee font-medium tracking-wider select-none">
               YOUR JAR: <strong className="font-semibold text-walnut inline-flex items-center gap-1"><RollingCounter value={drops} /> Drops of Light</strong>
             </span>
           </div>
@@ -731,14 +736,14 @@ export default function InteractiveJar() {
                 playTranquilChime();
               }}
               disabled={ceremonyStep !== 'idle'}
-              className="font-mono text-[10px] text-coffee/90 hover:text-terracotta tracking-wider uppercase transition-colors cursor-pointer disabled:opacity-40"
+              className="font-mono text-[10px] text-coffee/97 hover:text-terracotta tracking-wider uppercase transition-colors cursor-pointer disabled:opacity-40"
             >
               Reset Jar
             </button>
             <span className="text-sand select-none">|</span>
             <button
               onClick={() => setIsMuted(!isMuted)}
-              className="font-mono text-[10px] text-coffee/90 hover:text-terracotta tracking-wider uppercase transition-colors cursor-pointer"
+              className="font-mono text-[10px] text-coffee/97 hover:text-terracotta tracking-wider uppercase transition-colors cursor-pointer"
             >
               {isMuted ? 'Unmute Chime' : 'Mute Chime'}
             </button>
@@ -748,4 +753,3 @@ export default function InteractiveJar() {
     </div>
   );
 }
-

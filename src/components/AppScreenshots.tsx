@@ -117,10 +117,10 @@ export default function AppScreenshots() {
   };
 
   return (
-    <div className="space-y-12 py-6">
+    <div className="space-y-10 py-5">
       {/* Editorial Navigation with Self-Drawing Divider line */}
-      <div className="relative pb-6">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-6">
+      <div className="relative pb-5">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-5">
           <div className="space-y-1">
             <span className="font-mono text-[11px] tracking-widest text-bronze uppercase block overflow-hidden">
               <motion.span
@@ -152,12 +152,12 @@ export default function AppScreenshots() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            className="flex flex-nowrap md:flex-wrap gap-2.5 z-10 overflow-x-auto pb-1 pr-1 -mx-1 px-1 no-scrollbar"
+            className="flex flex-wrap gap-2 sm:gap-2.5 z-10 w-full sm:w-auto"
           >
             {[
               { id: 'streak', label: 'Streaks of Sincerity', icon: Leaf },
               { id: 'family', label: 'The Family Circle', icon: Users },
-              { id: 'remembrance', label: 'Fajr Remembrance', icon: Clock }
+              { id: 'remembrance', label: 'Daily Remembrance', icon: Clock }
             ].map((tab) => {
               const Icon = tab.icon;
               const isSelected = activeTab === tab.id;
@@ -171,7 +171,7 @@ export default function AppScreenshots() {
                   }}
                   whileHover={{ scale: 1.03, y: -1 }}
                   whileTap={{ scale: 0.97 }}
-                  className={`relative flex items-center space-x-2.5 px-4 py-2.5 text-[11px] sm:text-xs font-sans rounded-full transition-all duration-300 border cursor-pointer select-none overflow-hidden shrink-0 whitespace-nowrap ${
+                  className={`relative flex items-center space-x-2 sm:space-x-2.5 px-3 py-2 sm:px-4 sm:py-2.5 text-[10.5px] sm:text-xs font-sans rounded-full transition-all duration-300 border cursor-pointer select-none overflow-hidden shrink-0 whitespace-nowrap ${
                     isSelected
                       ? 'text-ivory border-walnut shadow-sm'
                       : 'bg-white/50 text-coffee border-sand hover:bg-white hover:border-bronze'
@@ -253,9 +253,9 @@ export default function AppScreenshots() {
                   <div className="flex justify-between items-center">
                     <div className="flex items-center space-x-1.5">
                       <div className="w-2.5 h-2.5 rounded-full bg-olive animate-pulse" />
-                      <span className="font-mono text-[9px] text-coffee/85 uppercase tracking-widest">Mizan</span>
+                      <span className="font-mono text-[9px] text-coffee/95 uppercase tracking-widest">Mizan</span>
                     </div>
-                    <span className="font-mono text-[9px] text-coffee/85">05:41 AM (Fajr)</span>
+                    <span className="font-mono text-[9px] text-coffee/95">05:41 AM (Fajr)</span>
                   </div>
                   
                   {/* Status header divider that draws itself */}
@@ -285,7 +285,7 @@ export default function AppScreenshots() {
                           <h4 className="font-serif text-3xl text-walnut italic leading-none font-medium">
                             <AnimatedStreakCount value={18} /> Day Streak
                           </h4>
-                          <p className="font-sans text-[11px] text-coffee/90 max-w-[200px] mx-auto leading-normal">
+                          <p className="font-sans text-[11px] text-coffee/97 max-w-[200px] mx-auto leading-normal">
                             Your intentions are roots in quiet soil. Consistency is beloved to Allah.
                           </p>
                         </div>
@@ -294,7 +294,7 @@ export default function AppScreenshots() {
                         <div className="bg-parchment/60 border border-sand p-4 rounded-2xl space-y-3 shadow-[0_4px_20px_rgba(0,0,0,0.01)]">
                           <div className="relative pb-2">
                             <div className="flex justify-between items-center">
-                              <span className="font-mono text-[10px] text-coffee/95 uppercase font-semibold">Weekly Growth</span>
+                              <span className="font-mono text-[10px] text-coffee uppercase font-semibold">Weekly Growth</span>
                               <span className="font-mono text-[9px] text-olive font-bold uppercase">7/7 Given</span>
                             </div>
                             <motion.div 
@@ -308,7 +308,7 @@ export default function AppScreenshots() {
                           <div className="grid grid-cols-7 gap-1.5 pt-1">
                             {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day, i) => (
                               <div key={i} className="flex flex-col items-center space-y-1">
-                                <span className="font-mono text-[9px] text-coffee/75">{day}</span>
+                                <span className="font-mono text-[9px] text-coffee/92">{day}</span>
                                 <div className="w-7 h-10 rounded-lg bg-olive/10 border border-olive/20 flex items-center justify-center relative overflow-hidden">
                                   <motion.div
                                     initial={{ height: 0 }}
@@ -325,7 +325,7 @@ export default function AppScreenshots() {
 
                         {/* Habit Log */}
                         <div className="space-y-2">
-                          <span className="font-mono text-[10px] text-coffee/85 uppercase block">Today's Garden Actions</span>
+                          <span className="font-mono text-[10px] text-coffee/95 uppercase block">Today's Garden Actions</span>
                           
                           <div className="bg-white/80 border border-sand rounded-xl p-3 flex items-center justify-between shadow-[0_2px_10px_rgba(0,0,0,0.01)]">
                             <div className="flex items-center space-x-2.5">
@@ -334,7 +334,7 @@ export default function AppScreenshots() {
                               </div>
                               <div>
                                 <p className="font-sans text-xs font-semibold text-walnut">Fajr Gratitude Drop</p>
-                                <p className="font-sans text-[10px] text-coffee/75">Recorded at 04:52 AM</p>
+                                <p className="font-sans text-[10px] text-coffee/92">Recorded at 04:52 AM</p>
                               </div>
                             </div>
                             <span className="font-mono text-[10px] text-olive font-bold">+1 Drop</span>
@@ -347,10 +347,10 @@ export default function AppScreenshots() {
                               </div>
                               <div>
                                 <p className="font-sans text-xs font-semibold text-walnut">Friday Jumu'ah Charity</p>
-                                <p className="font-sans text-[10px] text-coffee/75">Awaiting blessing</p>
+                                <p className="font-sans text-[10px] text-coffee/92">Awaiting blessing</p>
                               </div>
                             </div>
-                            <span className="font-mono text-[9px] text-coffee/75">Pending</span>
+                            <span className="font-mono text-[9px] text-coffee/92">Pending</span>
                           </div>
                         </div>
                       </motion.div>
@@ -380,7 +380,7 @@ export default function AppScreenshots() {
                         {/* Live Stream of Generosity */}
                         <div className="space-y-2">
                           <div className="flex justify-between items-center">
-                            <span className="font-mono text-[10px] text-coffee/85 uppercase">Family Deeds Stream</span>
+                            <span className="font-mono text-[10px] text-coffee/95 uppercase">Family Deeds Stream</span>
                             <span className="font-mono text-[9px] text-terracotta font-semibold">Live Feed</span>
                           </div>
 
@@ -402,9 +402,9 @@ export default function AppScreenshots() {
                               <div className="flex-1 min-w-0">
                                 <div className="flex justify-between items-center">
                                   <p className="font-sans text-xs font-bold text-walnut">{item.name}</p>
-                                  <p className="font-mono text-[9px] text-coffee/70">{item.time}</p>
+                                  <p className="font-mono text-[9px] text-coffee/88">{item.time}</p>
                                 </div>
-                                <p className="font-sans text-[11px] text-coffee/95 mt-0.5 leading-snug">{item.action}</p>
+                                <p className="font-sans text-[11px] text-coffee mt-0.5 leading-snug">{item.action}</p>
                               </div>
                             </motion.div>
                           ))}
@@ -426,7 +426,7 @@ export default function AppScreenshots() {
                           <div className="space-y-1">
                             <p className="font-mono text-[9px] tracking-wider text-bronze uppercase">Morning Remembrance</p>
                             <h4 className="font-serif text-2xl text-walnut italic">Subhan Allah</h4>
-                            <p className="font-sans text-[10px] text-coffee/60">Glory be to Allah</p>
+                            <p className="font-sans text-[10px] text-coffee/80">Glory be to Allah</p>
                           </div>
 
                           {/* Dhikr Bead Counter with slide vibration micro-animation */}
@@ -447,7 +447,7 @@ export default function AppScreenshots() {
                               className="flex flex-col items-center"
                             >
                               <span className="font-serif text-3xl font-medium text-walnut">{beadCount % 33}</span>
-                              <span className="font-mono text-[9px] text-coffee/50 uppercase tracking-widest">/ 33 Beads</span>
+                              <span className="font-mono text-[9px] text-coffee/72 uppercase tracking-widest">/ 33 Beads</span>
                             </motion.div>
                             
                             {/* Physical bead representation sliding inside */}
@@ -467,7 +467,7 @@ export default function AppScreenshots() {
                             />
                           </button>
 
-                          <p className="font-sans text-[10px] text-coffee/50 italic leading-normal">
+                          <p className="font-sans text-[10px] text-coffee/72 italic leading-normal">
                             Tap circle to slide the bead. Beautiful haptic click guides your breath.
                           </p>
                         </div>
@@ -515,7 +515,7 @@ export default function AppScreenshots() {
                 transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1], delay: 0.05 }}
                 className="font-serif text-3xl sm:text-4xl text-walnut leading-tight font-medium"
               >
-                An interface that feels like textured linen.
+                An interface that feels intentional.
               </motion.h4>
             </div>
 
@@ -524,11 +524,9 @@ export default function AppScreenshots() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
-              className="font-sans text-sm sm:text-base text-coffee/85 leading-relaxed font-normal"
+              className="font-sans text-sm sm:text-base text-coffee/95 leading-relaxed font-normal"
             >
-              We spent months stripping away unnecessary elements. No flashing popups, 
-              no leaderboard points, and no visual clutter. Instead, we designed a digital 
-              journal that respects your attention and centers your devotion.
+             Every screen is designed to help you focus on what matters. No distractions, no pressure, just a calm space that makes every small act of worship feel meaningful.
             </motion.p>
           </div>
 
@@ -538,19 +536,19 @@ export default function AppScreenshots() {
               {
                 icon: Leaf,
                 title: 'Streaks of Devotion, Not Numbers',
-                description: 'Most streak systems make you feel guilty for missing. Our "Streak Garden" rewards consistent rhythm. Even on a busy day, taking one second to drop a quiet prayer keeps your garden alive and your intent focused.',
+                description: 'Consistency grows one sincere act at a time. Your streak is not about perfection. It is a gentle reminder that even the smallest deed, done for Allah, is always worth continuing.',
                 colorClass: 'text-bronze'
               },
               {
                 icon: Users,
                 title: 'Generosity within Household Circles',
-                description: "Generosity isn't inherited—it is taught by example. Connect family jars to create a beautiful, private circle of giving. See the gentle trail of kindness that your spouse, children, and parents plant throughout the day.",
+                description: "Kindness is stronger when it is shared. Create a family circle where everyone can encourage one another, celebrate milestones together, and grow in good deeds as one household.",
                 colorClass: 'text-terracotta'
               },
               {
                 icon: Clock,
-                title: 'Sacred Morning Remembrance',
-                description: 'A beautiful integrated bead slider tracks your morning and evening Adhkar (remembrance). Receive warm prompts right after Fajr when the world is silent and the morning breeze bears testimony to your prayers.',
+                title: 'Daily Remembrance',
+                description: 'Keep your heart connected throughout the day. Follow your daily adhkar with a simple, peaceful experience that helps you build the habit of remembering Allah, one remembrance at a time.',
                 colorClass: 'text-olive'
               }
             ].map((bullet, index) => {
@@ -580,7 +578,7 @@ export default function AppScreenshots() {
                     <h5 className="font-serif text-lg sm:text-xl font-medium text-walnut italic leading-snug">
                       {bullet.title}
                     </h5>
-                    <p className="font-sans text-xs sm:text-[13px] text-coffee/85 leading-relaxed font-normal">
+                    <p className="font-sans text-xs sm:text-[13px] text-coffee/95 leading-relaxed font-normal">
                       {bullet.description}
                     </p>
                   </div>
@@ -594,5 +592,3 @@ export default function AppScreenshots() {
     </div>
   );
 }
-
-
