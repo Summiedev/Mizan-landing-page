@@ -320,4 +320,3 @@ export default function CinematicLoader({ onComplete, onExitStart }: CinematicLo
     </AnimatePresence>
   );
 }
-
